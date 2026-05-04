@@ -19,6 +19,7 @@
   "height":64,
   "HTile":false,
   "layers":[
+    {"$GMImageLayer":"","%Name":"314752f7-22f5-468b-86ef-d143b9411528","blendMode":3,"displayName":"Layer 1","isLocked":false,"name":"314752f7-22f5-468b-86ef-d143b9411528","opacity":30.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
     {"$GMImageLayer":"","%Name":"9b044e10-4bd8-4263-8552-6b189d5d3f42","blendMode":0,"displayName":"default","isLocked":false,"name":"9b044e10-4bd8-4263-8552-6b189d5d3f42","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"BG_Paper",

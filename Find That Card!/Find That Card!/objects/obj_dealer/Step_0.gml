@@ -1,5 +1,14 @@
 if (moveSfxCooldown > 0) moveSfxCooldown--;
 
+if (shakeTimer > 0)
+{
+	shakeTimer--;
+}
+else
+{
+	shakePower = 0;
+}
+
 switch (global.currentState)
 {
 	case states.setup_round:
@@ -20,13 +29,23 @@ switch (global.currentState)
 	break;
 
 	case states.hide_cards:
-		for (var i = 0; i < ds_list_size(cards); i++)
+
+		if (waitTimer == 0)
 		{
-			var c = cards[| i];
-			c.faceDown = true;
+			for (var i = 0; i < ds_list_size(cards); i++)
+			{
+				var c = cards[| i];
+				c.StartFlip(true);
+			}
+
+			waitTimer = 1;
+		}
+		else if (AllCardsReady())
+		{
+			waitTimer = 0;
+			global.currentState = states.shuffle_cards;
 		}
 
-		global.currentState = states.shuffle_cards;
 	break;
 
 	case states.shuffle_cards:
@@ -55,7 +74,7 @@ switch (global.currentState)
 	break;
 
 	case states.reveal_result:
-		if (AllCardsStopped())
+		if (AllCardsReady())
 		{
 			waitTimer++;
 

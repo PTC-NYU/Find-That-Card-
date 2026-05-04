@@ -35,6 +35,7 @@
   "name":"Find That Card!",
   "resources":[
     {"id":{"name":"Movement","path":"animcurves/Movement/Movement.yy",},},
+    {"id":{"name":"FindFont","path":"fonts/FindFont/FindFont.yy",},},
     {"id":{"name":"ScoreFont","path":"fonts/ScoreFont/ScoreFont.yy",},},
     {"id":{"name":"obj_card","path":"objects/obj_card/obj_card.yy",},},
     {"id":{"name":"obj_dealer","path":"objects/obj_dealer/obj_dealer.yy",},},

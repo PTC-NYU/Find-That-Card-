@@ -20,6 +20,13 @@ start_y = y;
 moveCurve = animcurve_get_channel(Movement, 0);
 
 drawScale = 2.5;
+drawScaleX = drawScale;
+
+isFlipping = false;
+flip_t = 0;
+flip_speed = 0.12;
+flipTargetFaceDown = faceDown;
+
 
 function StartMove(tx, ty, spd = 0.04)
 {
@@ -31,10 +38,11 @@ function StartMove(tx, ty, spd = 0.04)
 	move_speed = spd;
 	isMoving = true;
 
-	if (instance_exists(obj_dealer))
-	{
-		obj_dealer.PlayDealSfx();
-	}
+	var d = instance_find(obj_dealer, 0);
+		if (d != noone)
+		{
+			d.PlayDealSfx();
+		}
 }
 
 function PointOnCard(px, py)
@@ -50,3 +58,11 @@ function PointOnCard(px, py)
 		py <= y + sh * 0.5
 	);
 }
+
+function StartFlip(_faceDownAfter)
+{
+	isFlipping = true;
+	flip_t = 0;
+	flipTargetFaceDown = _faceDownAfter;
+}
+

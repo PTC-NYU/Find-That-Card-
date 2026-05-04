@@ -16,11 +16,34 @@ if (isMoving)
 	}
 }
 
+if (isFlipping)
+{
+	flip_t += flip_speed;
+
+	if (flip_t < 0.5)
+	{
+		drawScaleX = lerp(drawScale, 0, flip_t * 2);
+	}
+	else
+	{
+		faceDown = flipTargetFaceDown;
+		drawScaleX = lerp(0, drawScale, (flip_t - 0.5) * 2);
+	}
+
+	if (flip_t >= 1)
+	{
+		faceDown = flipTargetFaceDown;
+		drawScaleX = drawScale;
+		isFlipping = false;
+	}
+}
+
 if (global.currentState == global.STATE_WAIT_FOR_GUESS)
 {
 	var canClick =
 		isGuessable &&
 		!isMoving &&
+		!isFlipping &&
 		faceDown;
 
 	if (canClick && mouse_check_button_pressed(mb_left) && PointOnCard(mouse_x, mouse_y))
@@ -41,6 +64,11 @@ if (global.currentState == global.STATE_WAIT_FOR_GUESS)
 		{
 			audio_play_sound(loseSfx, 1, false);
 			global.lastGuessCorrect = false;
+			
+			with (obj_dealer)
+				{
+					StartShake(12, 25);
+				}
 		}
 
 		isGuessable = false;

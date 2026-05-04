@@ -12,7 +12,15 @@ shuffle_done = 0;
 shuffle_pair_a = -1;
 shuffle_pair_b = -1;
 
+shakeTimer = 0;
+shakePower = 0;
+
+currentBG = BG;
+
 global.lastGuessCorrect = true;
+
+global.shake_x = 0;
+global.shake_y = 0;
 
 enum states
 {
@@ -103,12 +111,27 @@ function SetupRound()
 	if (r == 0) global.targetType = "Rock";
 	if (r == 1) global.targetType = "Paper";
 	if (r == 2) global.targetType = "Scissors";
+	
+	if (global.targetType == "Rock") {
+			currentBG = BG_Rock;
+		}
+		else if (global.targetType == "Paper") {
+			currentBG = BG_Paper;
+		}
+		else if (global.targetType == "Scissors") {
+			currentBG = BG_Scissors;
+		}
+		else {
+			currentBG = BG;
+		}
 
 
 	for (var i = 0; i < ds_list_size(cards); i++)
 	{
 		var c = cards[| i];
 		c.faceDown = false;
+		c.drawScaleX = c.drawScale;
+		c.isFlipping = false;
 		c.isGuessable = false;
 		c.slotIndex = i;
 		c.StartMove(GetSlotX(i), center_y, 0.03);
@@ -170,7 +193,7 @@ function RevealAllCards()
 	for (var i = 0; i < ds_list_size(cards); i++)
 	{
 		var c = cards[| i];
-		c.faceDown = false;
+		c.StartFlip(false);
 		c.isGuessable = false;
 	}
 }
@@ -183,3 +206,20 @@ function ResetGame()
 	SetupRound();
 }
 
+function StartShake(_power, _time)
+{
+	shakePower = _power;
+	shakeTimer = _time;
+}
+
+
+function AllCardsReady()
+{
+	for (var i = 0; i < ds_list_size(cards); i++)
+	{
+		var c = cards[| i];
+		if (c.isMoving) return false;
+		if (c.isFlipping) return false;
+	}
+	return true;
+}
