@@ -57,6 +57,9 @@ var card;
 card = instance_create_depth(slot_1_x, center_y, 0, obj_card);
 card.cardType = "Rock";
 card.faceSprite = RockSpr;
+card.normalSprite = RockSpr;
+card.altSprite = RockSprAlt;
+card.displaySprite = RockSpr;
 card.faceDown = false;
 card.owner = "board";
 card.slotIndex = 0;
@@ -66,6 +69,9 @@ ds_list_add(cards, card);
 card = instance_create_depth(slot_2_x, center_y, 0, obj_card);
 card.cardType = "Paper";
 card.faceSprite = PaperSpr;
+card.normalSprite = PaperSpr;
+card.altSprite = PaperSprAlt;
+card.displaySprite = PaperSpr;
 card.faceDown = false;
 card.owner = "board";
 card.slotIndex = 1;
@@ -76,6 +82,9 @@ ds_list_add(cards, card);
 card = instance_create_depth(slot_3_x, center_y, 0, obj_card);
 card.cardType = "Scissors";
 card.faceSprite = ScissorsSpr;
+card.normalSprite = ScissorsSpr;
+card.altSprite = ScissorsSprAlt;
+card.displaySprite = ScissorsSpr;
 card.faceDown = false;
 card.owner = "board";
 card.slotIndex = 2;
@@ -135,6 +144,15 @@ function SetupRound()
 		c.isGuessable = false;
 		c.slotIndex = i;
 		c.StartMove(GetSlotX(i), center_y, 0.03);
+		
+		if (c.cardType == global.targetType)
+			{
+				c.displaySprite = c.altSprite;
+			}
+			else
+			{
+				c.displaySprite = c.normalSprite;
+			}
 	}
 
 	shuffle_done = 0;

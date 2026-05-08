@@ -8,6 +8,10 @@ cardType = "";
 faceSprite = -1;
 owner = "";
 
+displaySprite = faceSprite;
+normalSprite = faceSprite;
+altSprite = faceSprite;
+
 isGuessable = false;
 slotIndex = 0;
 

@@ -35,6 +35,7 @@ switch (global.currentState)
 			for (var i = 0; i < ds_list_size(cards); i++)
 			{
 				var c = cards[| i];
+				c.displaySprite = c.normalSprite;
 				c.StartFlip(true);
 			}
 
